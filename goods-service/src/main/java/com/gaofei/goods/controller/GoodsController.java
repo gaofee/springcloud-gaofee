@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
+@RequestMapping("goods")
 public class GoodsController {
 
     @Autowired
     private UserFeign userFeign;
 
-    @RequestMapping("goods")
-    public String goods(){
+    @RequestMapping("list")
+    public String list(){
         //在springcloud中不建议这么做
         /*String s = HttpUtil.get("http://localhost:8081/list");
         log.info("这是从user服务拿来的数据:{}",s);*/

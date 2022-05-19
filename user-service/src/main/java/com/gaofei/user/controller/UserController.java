@@ -1,5 +1,6 @@
 package com.gaofei.user.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @码云地址 : https://feege.gitee.io
  */
 @RestController
+@RequestMapping("user")
 public class UserController {
 
 

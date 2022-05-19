@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Component
 public interface UserFeign {
 
-    @RequestMapping("/list")
+    @RequestMapping("/user/list")
     public String list();
 }

@@ -12,6 +12,7 @@
         <module>eureka-server</module>
         <module>user-service</module>
         <module>goods-service</module>
+        <module>cloud-gateway</module>
     </modules>
     <!--springboot依赖-->
     <parent>
