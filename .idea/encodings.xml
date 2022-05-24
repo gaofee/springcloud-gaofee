@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/cloud-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eureka-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/goods-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mongo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springdatajpa-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
   </component>
 </project>
