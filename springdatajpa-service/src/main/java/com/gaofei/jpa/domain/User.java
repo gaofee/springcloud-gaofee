@@ -22,4 +22,9 @@ public class User implements Serializable {
     private Integer id;
     private String name;
     private Date birthday;
+
+    @Transient //忽略这个字段和数据库表的映射
+    private Date beginTime;
+    @Transient
+    private Date endTime;
 }
