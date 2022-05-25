@@ -24,8 +24,17 @@ public class User implements Serializable {
     private String name;
     @Temporal(TemporalType.DATE)
     private Date birthday;
-
+                                                                                                //指定被维护端
     @OneToMany(targetEntity = Orders.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "users")
     private List<Orders> ordersList;
 
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }

@@ -36,4 +36,14 @@ public class Orders implements Serializable {
     @JoinColumn(name = "uid")
     private User users;
 
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id=" + id +
+                ", orderDetails='" + orderDetails + '\'' +
+                ", createTime=" + createTime +
+                ", beginTime=" + beginTime +
+                '}';
+    }
 }

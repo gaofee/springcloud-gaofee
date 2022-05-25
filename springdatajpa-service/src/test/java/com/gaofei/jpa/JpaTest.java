@@ -8,8 +8,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +32,47 @@ public class JpaTest {
 
     @Autowired
     UserRepository userRepository;
+
+    @Test
+    public void list(){
+        Specification specification = new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
+                User user = new User();
+                user.setName("lisi");
+                user.setId(1);
+                //保存查询条件
+                List<Predicate> predicates = new ArrayList<>();
+                //模糊查询
+                if(!StringUtils.isEmpty(user.getName())){
+                    Predicate username = cb.like(root.get("name"), "%".concat(user.getName()).concat("%"));
+                    predicates.add(username);
+                }
+                //等于
+                if(!StringUtils.isEmpty(user.getId())){
+                    Predicate password = cb.equal(root.get("id"), user.getId());
+                    predicates.add(password);
+                }
+               /* //大于等于
+                if(userEntity.getStartDate()!=null){
+                    Predicate predicate = cb.greaterThanOrEqualTo(root.get("created"), userEntity.getStartDate());
+                    predicates.add(predicate);
+                }
+                //小于等于
+                if(userEntity.getEndDate()!=null){
+                    Predicate predicate = cb.lessThanOrEqualTo(root.get("created"), userEntity.getEndDate());
+                    predicates.add(predicate);
+                }*/
+                return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+            }
+        };
+        Pageable pageable = PageRequest.of(0,2, Sort.Direction.DESC,"id");
+        userRepository.findAll(specification,pageable);
+
+
+
+    }
+
 
 
     @Test
