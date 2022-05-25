@@ -1,6 +1,7 @@
 package com.gaofei.jpa;
 
 import com.gaofei.jpa.dao.UserRepository;
+import com.gaofei.jpa.domain.Orders;
 import com.gaofei.jpa.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -50,9 +52,22 @@ public class JpaTest {
     @Test
     public void save(){
         User user = new User();
-//        user.setId(1);
         user.setBirthday(new Date());
-        user.setName("lisi");
+        user.setName("wangwu1122");
+
+
+        Orders o1 = new Orders();
+        Orders o2 = new Orders();
+        o1.setOrderDetails("订单1");
+        o2.setOrderDetails("订单2");
+
+        o1.setUsers(user);
+        o2.setUsers(user);
+
+        List<Orders> orders = Arrays.asList(o1, o2);
+
+        user.setOrdersList(orders);
+
         userRepository.save(user);
     }
 }

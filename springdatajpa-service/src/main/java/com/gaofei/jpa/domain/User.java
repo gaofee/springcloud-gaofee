@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author : gaofee
@@ -21,10 +22,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @Transient //忽略这个字段和数据库表的映射
-    private Date beginTime;
-    @Transient
-    private Date endTime;
+    @OneToMany(targetEntity = Orders.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "users")
+    private List<Orders> ordersList;
+
 }
