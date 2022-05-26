@@ -13,11 +13,13 @@
         <module name="mongo-service" />
         <module name="user-service" />
         <module name="springdatajpa-service" />
+        <module name="auth-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auth-service" options="-parameters" />
       <module name="cloud-gateway" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="goods-service" options="-parameters" />

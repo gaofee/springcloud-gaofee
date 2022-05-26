@@ -1,17 +1,18 @@
-package com.gaofei.jpa;
+package com.gaofei.auth;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 总结出来结论了
  * @author : gaofee
- * @date : 11:01 2022/5/24
+ * @date : 10:49 2022/5/26
  * @码云地址 : https://feege.gitee.io
  */
 @SpringBootApplication
-public class JpaApp {
+@MapperScan("com.gaofei.auth.mapper")
+public class AuthApp {
     public static void main(String[] args) {
-        SpringApplication.run(JpaApp.class, args);
+        SpringApplication.run(AuthApp.class, args);
     }
 }

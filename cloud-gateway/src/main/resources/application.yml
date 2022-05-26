@@ -10,10 +10,10 @@ spring:
       discovery:
         locator:
           enabled: true
-  redis:
-    host: localhost
-    port: 6379
-    database: 0
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
 server:
   port: 8200
 #服务注册中心地址
@@ -36,13 +36,13 @@ spring:
           #去除前缀
           filters:
             - StripPrefix=1
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@addressKey}' #使用SpEL表达式从Spring容器中获取Bean对象
-                # # 令牌桶的流速
-                redis-rate-limiter.replenishRate: 10
-                # 总容量
-                redis-rate-limiter.burstCapacity: 15
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: '#{@addressKey}' #使用SpEL表达式从Spring容器中获取Bean对象
+#                # # 令牌桶的流速
+#                redis-rate-limiter.replenishRate: 10
+#                # 总容量
+#                redis-rate-limiter.burstCapacity: 15
           #gateway网关的唯一标识
         - id: goodsService
           #后端微服务的名称，和注册中心的名称一致
@@ -53,13 +53,13 @@ spring:
           #去除前缀
           filters:
             - StripPrefix=1
-            - name: RequestRateLimiter
-              args:
-                key-resolver: '#{@addressKey}' #使用SpEL表达式从Spring容器中获取Bean对象
-                # # 令牌桶的流速
-                redis-rate-limiter.replenishRate: 10
-                # 总容量
-                redis-rate-limiter.burstCapacity: 15
+#            - name: RequestRateLimiter
+#              args:
+#                key-resolver: '#{@addressKey}' #使用SpEL表达式从Spring容器中获取Bean对象
+#                # # 令牌桶的流速
+#                redis-rate-limiter.replenishRate: 10
+#                # 总容量
+#                redis-rate-limiter.burstCapacity: 15
   profiles: route
 
 ---

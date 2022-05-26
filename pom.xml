@@ -15,6 +15,7 @@
         <module>cloud-gateway</module>
         <module>mongo-service</module>
         <module>springdatajpa-service</module>
+        <module>auth-service</module>
     </modules>
     <!--springboot依赖-->
     <parent>
