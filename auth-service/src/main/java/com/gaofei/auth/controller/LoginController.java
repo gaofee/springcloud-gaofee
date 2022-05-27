@@ -4,6 +4,7 @@ import com.gaofei.auth.domain.User;
 import com.gaofei.auth.service.LoginServcie;
 import com.gaofei.auth.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,14 @@ public class LoginController {
     }
 
     @RequestMapping("list")
+    @PreAuthorize("hasAuthority('sys:user:list')") //声明所需的权限
     public String list(){
-        return "hello";
+        return "list";
+    }
+    @RequestMapping("del")
+    @PreAuthorize("hasAuthority('sys:user:del')")
+    public String del(){
+        return "del";
     }
 
 }
