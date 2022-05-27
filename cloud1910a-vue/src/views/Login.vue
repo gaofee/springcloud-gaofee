@@ -5,8 +5,8 @@
             <el-col :span="8"><div class="grid-content">
                 <el-form :model="ruleForm" status-icon  ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
-                    <el-form-item label="用户名" prop="username">
-                        <el-input v-model.number="ruleForm.username"></el-input>
+                    <el-form-item label="用户名" prop="userName">
+                        <el-input v-model.number="ruleForm.userName"></el-input>
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
                         <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
@@ -28,20 +28,20 @@
         data(){
             return{
                 ruleForm: {
-                    password: 'admin',
-                    username: 'admin'
+                    password: '1234',
+                    userName: 'gaofei'
                 }
             }
         },
         methods:{
             submitForm(){
-                this.axios.get("http://localhost:8200/api/user/login?username="+this.ruleForm.username+"&password="+this.ruleForm.password).then(resp=>{
+                this.axios.post("http://localhost:8200/api/user/login",this.ruleForm).then(resp=>{
                     console.log(resp.data)
                     if(resp.data=="error"){
                         //提示错误
                         //不进行跳转,刷新页面
                     }
-                    localStorage.setItem("tokenId", resp.data);
+                    localStorage.setItem("tokenId", resp.data.data.token);
                     this.$router.push("/")
                 })
             }

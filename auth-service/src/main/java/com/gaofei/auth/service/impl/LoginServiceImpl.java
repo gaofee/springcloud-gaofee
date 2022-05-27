@@ -1,5 +1,6 @@
 package com.gaofei.auth.service.impl;
 
+import cn.hutool.jwt.JWT;
 import com.gaofei.auth.domain.LoginUser;
 import com.gaofei.auth.domain.User;
 import com.gaofei.auth.service.LoginServcie;
@@ -42,7 +43,12 @@ public class LoginServiceImpl implements LoginServcie {
         //使用userid生成token
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
-        String jwt = JwtUtil.createJWT(userId);
+//        String jwt = JwtUtil.createJWT(userId);
+        //使用hutool工具类生成token
+        String jwt = JWT.create()
+                .setPayload("userId", userId)
+                .setKey("gaofei".getBytes())
+                .sign();
         //​		把用户信息存入redis中
         redisCache.setCacheObject("login:"+userId,loginUser);
         //把token响应给前端

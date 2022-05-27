@@ -23,7 +23,7 @@ axios.interceptors.request.use(function (config) {
   if(token){
     //然后拼接到请求头
     //如果localStorage中有token,就把token放入请求头
-    config.headers.Authorization = token
+    config.headers.token = token
   }
 
   return config;

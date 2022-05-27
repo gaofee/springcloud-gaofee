@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <el-button type="success" @click="aa">登录成功后访问其他接口</el-button>
-    <img alt="Vue logo" src="../assets/logo.png">
+    <el-button type="success" @click="aa">登录成功后访问list接口</el-button>
+    <el-button type="success" @click="bb">登录成功后访问del接口</el-button>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
 
 
@@ -20,6 +20,11 @@ export default {
   methods:{
     aa(){
       this.axios.get("http://localhost:8200/api/user/list").then(resp=>{
+        alert(resp.data)
+      })
+    },
+    bb(){
+      this.axios.get("http://localhost:8200/api/user/del").then(resp=>{
         alert(resp.data)
       })
     }

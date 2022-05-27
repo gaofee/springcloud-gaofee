@@ -1,7 +1,5 @@
 package com.gaofei.gateway.filter;
 
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.jwt.JWT;
 import org.apache.commons.lang.StringUtils;
@@ -9,7 +7,6 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -23,8 +20,8 @@ import java.util.HashMap;
  * @date : 11:17 2022/5/20
  * @码云地址 : https://feege.gitee.io
  */
-//@Component
-public class LoginFilter implements GlobalFilter, Ordered {
+@Component
+public class LoginFilterToSecutity implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -32,11 +29,11 @@ public class LoginFilter implements GlobalFilter, Ordered {
         System.out.println("执行了过滤器的代码!!");
         //1.首先对登录请求进行放行
         String path = exchange.getRequest().getURI().getPath();
-        if(path.contains("/login")){
+        if(path.contains("/user/login")){
             return chain.filter(exchange);
         }
         //2.从请求头中获取token
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        String token = exchange.getRequest().getHeaders().getFirst("token");
         //3.检查token是否合法jwt
         if(StringUtils.isBlank(token) || !JWT.of(token).setKey("gaofei".getBytes()).verify()){
             //不合法

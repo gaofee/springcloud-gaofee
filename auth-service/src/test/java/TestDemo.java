@@ -1,3 +1,4 @@
+import cn.hutool.jwt.JWT;
 import com.gaofei.auth.AuthApp;
 import com.gaofei.auth.domain.User;
 import com.gaofei.auth.mapper.UserMapper;
@@ -35,7 +36,10 @@ public class TestDemo {
 
     @Test
     public void testmb(){
-        List<User> users = userMapper.selectList(null);
-        System.out.println(users);
+//        List<User> users = userMapper.selectList(null);
+//        System.out.println(users);
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJjOTg2MTNkNDRkOTc0ZjY5YTllMzM2MDU1MzY5Y2JkYSIsInN1YiI6IjIiLCJpc3MiOiJzZyIsImlhdCI6MTY1MzYzOTYxOSwiZXhwIjoxNjUzNjQzMjE5fQ.YsH4AMKnInmHLwKC5dc3Ju4QAGbJCAjW-2PoRlt5o9s";
+        boolean verify = JWT.of(token).verify();
+        System.out.println(verify);
     }
 }

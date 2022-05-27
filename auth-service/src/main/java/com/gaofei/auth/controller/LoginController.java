@@ -16,23 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
  * @码云地址 : https://feege.gitee.io
  */
 @RestController
+@RequestMapping("/user")
 public class LoginController {
 
 
     @Autowired
     private LoginServcie loginServcie;
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public ResponseResult login(@RequestBody User user){
         return loginServcie.login(user);
     }
 
-    @RequestMapping("list")
+    @RequestMapping("/list")
     @PreAuthorize("hasAuthority('sys:user:list')") //声明所需的权限
     public String list(){
         return "list";
     }
-    @RequestMapping("del")
+    @RequestMapping("/del")
     @PreAuthorize("hasAuthority('sys:user:del')")
     public String del(){
         return "del";

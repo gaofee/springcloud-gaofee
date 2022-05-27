@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -19,6 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
 
     @Bean
@@ -43,6 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //把token校验过滤器添加到过滤器链中
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
+        //使用自定义的失败处理方案
+        http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).
+                accessDeniedHandler(accessDeniedHandler);
     }
 
     //让ProviderManager对象交给spring管理,方便在登录接口中使用

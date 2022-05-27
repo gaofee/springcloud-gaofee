@@ -26,6 +26,16 @@ spring:
   cloud:
     gateway:
       routes:
+        #gateway网关的唯一标识
+        - id: authService
+          #后端微服务的名称，和注册中心的名称一致
+          uri: lb://AUTH-SERVICE
+          #断言策略，根据path断言
+          predicates:
+            - Path=/api/user/**
+          #去除前缀
+          filters:
+            - StripPrefix=1
           #gateway网关的唯一标识
         - id: userService
           #后端微服务的名称，和注册中心的名称一致

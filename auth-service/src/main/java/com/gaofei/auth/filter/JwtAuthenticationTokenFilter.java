@@ -1,5 +1,7 @@
 package com.gaofei.auth.filter;
 
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
 import com.gaofei.auth.domain.LoginUser;
 import com.gaofei.auth.utils.JwtUtil;
 import com.gaofei.auth.utils.RedisCache;
@@ -29,18 +31,34 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException,  IOException {
-        //获取token
-        String token = request.getHeader("token");
-        if (!StringUtils.hasText(token)) {
+        String requestURI = request.getRequestURI();
+        if(requestURI.equals("/user/login")){
             //放行
             filterChain.doFilter(request, response);
             return;
         }
+        //获取token
+        String token = request.getHeader("token");
+        if (StringUtils.isEmpty(token)) {
+            //放行
+            filterChain.doFilter(request, response);
+            return;
+        }
+        //校验合法性
+        if(!JWT.of(token).setKey("gaofei".getBytes()).verify()){
+            //放行
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         //解析token
         String userid;
         try {
-            Claims claims = JwtUtil.parseJWT(token);
-            userid = claims.getSubject();
+//            Claims claims = JwtUtil.parseJWT(token);
+//            userid = claims.getSubject();
+            //使用hutool工具类解析token
+            JWT jwt = JWT.of(token);
+            userid= (String) jwt.getPayload("userId");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("token非法");
