@@ -9,9 +9,10 @@ springcloud
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  启动eureka-server
+2.  启动网关gateway
+3.  启动auth-service
+4.  启动vue前端工程
 
 #### 使用说明
 
