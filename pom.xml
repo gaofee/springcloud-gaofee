@@ -16,6 +16,7 @@
         <module>mongo-service</module>
         <module>springdatajpa-service</module>
         <module>auth-service</module>
+        <module>search-service</module>
     </modules>
     <!--springboot依赖-->
     <parent>
