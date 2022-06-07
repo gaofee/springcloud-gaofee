@@ -11,6 +11,10 @@
                     <el-form-item label="密码" prop="password">
                         <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
                     </el-form-item>
+                    <el-form-item label="验证码" prop="password">
+                        <el-input type="text" v-model="ruleForm.code" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-image :src="codeImgUrl" @click="captcha"></el-image>
                     <el-form-item>
                         <el-button type="primary" @click="submitForm">提交</el-button>
                     </el-form-item>
@@ -18,6 +22,7 @@
 
             </div></el-col>
             <el-col :span="8"><div class="grid-content"></div></el-col>
+
         </el-row>
     </div>
 </template>
@@ -29,22 +34,41 @@
             return{
                 ruleForm: {
                     password: '1234',
-                    userName: 'gaofei'
-                }
+                    userName: 'admin',
+                    code:''
+                },
+                codeImgUrl:'http://127.0.0.1:8081/upload/line.png'
             }
         },
         methods:{
+            captcha(){
+                this.axios.get("http://localhost:8200/api/user/captcha").then(resp=>{
+                    console.log(resp.data)
+                    this.codeImgUrl=resp.data+"?time="+new Date().getMilliseconds();
+                });
+            },
             submitForm(){
-                this.axios.post("http://localhost:8200/api/user/login",this.ruleForm).then(resp=>{
+                this.axios.get("http://localhost:8200/api/user/login?userName="+this.ruleForm.userName+"&password="+this.ruleForm.password+"&code="+this.ruleForm.code).then(resp=>{
                     console.log(resp.data)
                     if(resp.data=="error"){
                         //提示错误
                         //不进行跳转,刷新页面
+                        alert(resp.data)
+                    }else if(resp.data==="codeerror"){
+                        alert(resp.data)
+                    } else if(resp.data==="codeexpire"){
+                        alert(resp.data)
                     }
-                    localStorage.setItem("tokenId", resp.data.data.token);
-                    this.$router.push("/")
+                    else {
+                        localStorage.setItem("tokenId", resp.data);
+                        this.$router.push("/")
+                    }
                 })
             }
+
+        },
+        created() {
+            this.captcha();
         }
     }
 </script>

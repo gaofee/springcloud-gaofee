@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @date : 11:17 2022/5/20
  * @码云地址 : https://feege.gitee.io
  */
-@Component
+//@Component
 public class LoginFilterToSecutity implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

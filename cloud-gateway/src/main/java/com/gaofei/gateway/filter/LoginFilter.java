@@ -9,6 +9,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 
 /**
@@ -23,8 +25,10 @@ import java.util.HashMap;
  * @date : 11:17 2022/5/20
  * @码云地址 : https://feege.gitee.io
  */
-//@Component
+@Component
 public class LoginFilter implements GlobalFilter, Ordered {
+    @Resource
+    RedisTemplate redisTemplate;
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -35,10 +39,14 @@ public class LoginFilter implements GlobalFilter, Ordered {
         if(path.contains("/login")){
             return chain.filter(exchange);
         }
+        if(path.contains("/captcha")){
+            return chain.filter(exchange);
+        }
+        String redisToken = (String) redisTemplate.opsForValue().get("tokenId");
         //2.从请求头中获取token
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        String token = exchange.getRequest().getHeaders().getFirst("token");
         //3.检查token是否合法jwt
-        if(StringUtils.isBlank(token) || !JWT.of(token).setKey("gaofei".getBytes()).verify()){
+        if(redisToken==null||StringUtils.isBlank(token) || !JWT.of(token).setKey("gaofei".getBytes()).verify()){
             //不合法
             HashMap<String, Object> params = new HashMap<>();
             params.put("code",401);
