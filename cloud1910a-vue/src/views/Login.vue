@@ -44,7 +44,7 @@
             captcha(){
                 this.axios.get("http://localhost:8200/api/user/captcha").then(resp=>{
                     console.log(resp.data)
-                    this.codeImgUrl=resp.data+"?time="+new Date().getMilliseconds();
+                    this.codeImgUrl=resp.data/*+"?time="+new Date().getMilliseconds()*/;
                 });
             },
             submitForm(){

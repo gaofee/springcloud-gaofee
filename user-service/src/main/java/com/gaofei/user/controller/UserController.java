@@ -5,21 +5,20 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.lang.Console;
 import cn.hutool.jwt.JWT;
-import com.gaofei.user.api.GoodsFeign;
+import com.gaofei.user.api.LogFeign;
 import com.gaofei.user.domain.User;
 import com.gaofei.user.mapper.UserMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.TimeoutUtils;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
@@ -79,8 +78,8 @@ public class UserController {
     @Resource
     UserMapper userMapper;
 
-    @Resource
-    GoodsFeign goodsFeign;
+    /*@Resource
+    GoodsFeign goodsFeign;*/
     @RequestMapping("/list")
     @ApiOperation(value="用户列表",notes="pageNum当前页,pageSize每页显示大小")
     @Transactional  //本地事务,只针对一个数据库有效,不能够同时控制多个数据库的事务
@@ -97,20 +96,29 @@ public class UserController {
     }
 
 
+    @Resource
+    private LogFeign logFeign;
+
     @RequestMapping("captcha")
     public  Object captcha(){
-        //定义图形验证码的长和宽
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100);
+        try {
+            //定义图形验证码的长和宽
+            LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100);
 
-        //图形验证码写出，可以写出到文件，也可以写出到流
-        lineCaptcha.write("d:/upload/line.png");
-        //输出code
-        Console.log(lineCaptcha.getCode());
+            //图形验证码写出，可以写出到文件，也可以写出到流
+            lineCaptcha.write("d:/upload/line.png");
+            //输出code
+            Console.log(lineCaptcha.getCode());
 
-        //把生成的验证码存入redis,过期时间是1分钟
-        redisTemplate.opsForValue().set("capCode",lineCaptcha.getCode(), 60, TimeUnit.SECONDS);
-        //验证图形验证码的有效性，返回boolean值
+            User user =null;
+            user.setName("zhangsan");
+
+//            int i = 1/0;
+            //把生成的验证码存入redis,过期时间是1分钟
+            redisTemplate.opsForValue().set("capCode",lineCaptcha.getCode(), 60, TimeUnit.SECONDS);
+            //验证图形验证码的有效性，返回boolean值
 //        lineCaptcha.verify("1234");
+
 
         /*//重新生成验证码
         lineCaptcha.createCode();
@@ -119,7 +127,13 @@ public class UserController {
         Console.log(lineCaptcha.getCode());
         //验证图形验证码的有效性，返回boolean值
         lineCaptcha.verify("1234");*/
-        return "http://127.0.0.1:8081/upload/line.png";
+        } catch (Exception e) {
+            String localizedMessage = e.getLocalizedMessage();
+            System.out.println(localizedMessage+"=========");
+            //远程调用日志服务,保存日志
+            logFeign.save(UUID.randomUUID().toString().replace("-", ""), e.getMessage()+"");
+        }
+        return "http://127.0.0.1:8081/upload/line.png?time="+new Date().getTime();
     }
 
 }

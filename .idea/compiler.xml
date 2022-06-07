@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-gateway" />
+        <module name="log-service" />
         <module name="goods-service" />
         <module name="eureka-server" />
         <module name="mongo-service" />
@@ -24,6 +25,7 @@
       <module name="cloud-gateway" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="goods-service" options="-parameters" />
+      <module name="log-service" options="-parameters" />
       <module name="mongo-service" options="-parameters" />
       <module name="search-service" options="-parameters" />
       <module name="springcloud-1910a" options="-parameters" />
