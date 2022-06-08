@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableEurekaClient
 @MapperScan("com.gaofei.user.mapper")
 //开启远程调用
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.gaofei"})
 @EnableTransactionManagement //开启事务管理
 public class UserApp {
     public static void main(String[] args) {

@@ -58,6 +58,8 @@ public class LoginFilter implements GlobalFilter, Ordered {
             DataBuffer wrap = response.bufferFactory().wrap(JSONUtil.toJsonStr(params).getBytes());
             return response.writeWith(Flux.just(wrap));
         }
+        //3.1如果redisToken和请求头中token不一致-->token被篡改
+
         //4.合法就放行,
         return chain.filter(exchange);
     }

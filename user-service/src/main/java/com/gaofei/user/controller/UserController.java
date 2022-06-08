@@ -5,6 +5,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.lang.Console;
 import cn.hutool.jwt.JWT;
+import com.gaofei.log1.api.Log1Feign;
 import com.gaofei.user.api.LogFeign;
 import com.gaofei.user.domain.User;
 import com.gaofei.user.mapper.UserMapper;
@@ -99,6 +100,16 @@ public class UserController {
     @Resource
     private LogFeign logFeign;
 
+    @Resource
+    private Log1Feign log1Feign;
+
+    @RequestMapping("aaaa")
+    public  String aaaa(){
+        log1Feign.save(UUID.randomUUID().toString().replace("-", ""), "参数异常");
+        return "success";
+    }
+
+
     @RequestMapping("captcha")
     public  Object captcha(){
         try {
@@ -110,10 +121,8 @@ public class UserController {
             //输出code
             Console.log(lineCaptcha.getCode());
 
-            User user =null;
-            user.setName("zhangsan");
 
-//            int i = 1/0;
+            int i = 1/0;
             //把生成的验证码存入redis,过期时间是1分钟
             redisTemplate.opsForValue().set("capCode",lineCaptcha.getCode(), 60, TimeUnit.SECONDS);
             //验证图形验证码的有效性，返回boolean值
@@ -128,8 +137,8 @@ public class UserController {
         //验证图形验证码的有效性，返回boolean值
         lineCaptcha.verify("1234");*/
         } catch (Exception e) {
-            String localizedMessage = e.getLocalizedMessage();
-            System.out.println(localizedMessage+"=========");
+
+
             //远程调用日志服务,保存日志
             logFeign.save(UUID.randomUUID().toString().replace("-", ""), e.getMessage()+"");
         }

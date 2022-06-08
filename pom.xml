@@ -18,6 +18,7 @@
         <module>auth-service</module>
         <module>search-service</module>
         <module>log-service</module>
+        <module>log1-service</module>
     </modules>
     <!--springboot依赖-->
     <parent>
