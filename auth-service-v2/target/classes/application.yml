@@ -1,0 +1,17 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: auth-service-v2
+  datasource:
+    url: jdbc:mysql://localhost:3306/springsecurity_1910a?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: gaofei
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+

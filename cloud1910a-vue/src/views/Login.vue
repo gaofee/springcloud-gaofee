@@ -37,18 +37,18 @@
                     userName: 'admin',
                     code:''
                 },
-                codeImgUrl:'http://127.0.0.1:8081/upload/line.png'
+                codeImgUrl:'http://192.168.21.1:8081/upload/line.png'
             }
         },
         methods:{
             captcha(){
-                this.axios.get("http://localhost:8200/api/user/captcha").then(resp=>{
+                this.axios.get("/user/captcha").then(resp=>{
                     console.log(resp.data)
                     this.codeImgUrl=resp.data/*+"?time="+new Date().getMilliseconds()*/;
                 });
             },
             submitForm(){
-                this.axios.get("http://localhost:8200/api/user/login?userName="+this.ruleForm.userName+"&password="+this.ruleForm.password+"&code="+this.ruleForm.code).then(resp=>{
+                this.axios.get("/user/login?userName="+this.ruleForm.userName+"&password="+this.ruleForm.password+"&code="+this.ruleForm.code).then(resp=>{
                     console.log(resp.data)
                     if(resp.data=="error"){
                         //提示错误

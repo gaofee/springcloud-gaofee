@@ -88,11 +88,12 @@ public class UserController {
         /*User user = new User();
         user.setName("users");
         userMapper.insert(user);
-
         //1库保存
         //2库保存
         String list = goodsFeign.list();
         int i = 1/0;*/
+
+        System.out.println("user-service11111111111111");
         return "这是user服务的list接口!!******";
     }
 
@@ -122,7 +123,7 @@ public class UserController {
             Console.log(lineCaptcha.getCode());
 
 
-            int i = 1/0;
+//            int i = 1/0;
             //把生成的验证码存入redis,过期时间是1分钟
             redisTemplate.opsForValue().set("capCode",lineCaptcha.getCode(), 60, TimeUnit.SECONDS);
             //验证图形验证码的有效性，返回boolean值
@@ -142,7 +143,7 @@ public class UserController {
             //远程调用日志服务,保存日志
             logFeign.save(UUID.randomUUID().toString().replace("-", ""), e.getMessage()+"");
         }
-        return "http://127.0.0.1:8081/upload/line.png?time="+new Date().getTime();
+        return "http://192.168.21.1:8081/upload/line.png?time="+new Date().getTime();
     }
 
 }

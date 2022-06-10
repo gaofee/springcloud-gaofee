@@ -4,6 +4,7 @@ import com.gaofei.log.domain.SysLog;
 import com.gaofei.log.repository.LogRep;
 import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,5 +47,16 @@ public class LogController {
         List<SysLog> sysLogByMsgLike = logRep.findSysLogByMsgLike(msg);
 
         return sysLogByMsgLike;
+    }
+
+    @RequestMapping("/list1")
+    @PreAuthorize("hasAuthority('sys:user:list')") //声明所需的权限
+    public String list1(){
+        return "list";
+    }
+    @RequestMapping("/del")
+    @PreAuthorize("hasAuthority('sys:user:del')")
+    public String del(){
+        return "del";
     }
 }

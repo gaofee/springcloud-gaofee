@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @date : 16:21 2022/5/19
  * @码云地址 : https://feege.gitee.io
  */
-@Component
+//@Component
 public class UserCallback implements UserFeign{
     @Override
     public String list() {

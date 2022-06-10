@@ -5,7 +5,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
+//配置全局路径
+axios.defaults.baseURL="http://192.168.21.1:8200/api";
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 Vue.use(ElementUI);
@@ -21,7 +22,7 @@ axios.interceptors.request.use(function (config) {
   //从localStorage中取出token
   var token = localStorage.getItem("tokenId");
   if(token){
-    //然后拼接到请求头
+    //然后拼接到请求头  ctrl shift  r
     //如果localStorage中有token,就把token放入请求头
     config.headers.token = token
   }

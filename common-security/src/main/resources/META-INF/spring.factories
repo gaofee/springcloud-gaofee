@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.gaofei.common.security.config.RedisConfig,\
+  com.gaofei.common.security.config.SecurityConfig,\
+  com.gaofei.common.security.exception.AccessDeniedHandlerImpl,\
+  com.gaofei.common.security.exception.AuthenticationEntryPointImpl,\
+  com.gaofei.common.security.filter.JwtAuthenticationTokenFilter,\
+  com.gaofei.common.security.utils.RedisCache
+

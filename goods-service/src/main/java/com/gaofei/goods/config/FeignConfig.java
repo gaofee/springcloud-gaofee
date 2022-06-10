@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date : 10:43 2022/5/28
  * @码云地址 : https://feege.gitee.io
  */
-@Configuration
+//@Configuration
 public class FeignConfig implements RequestInterceptor {
 
 

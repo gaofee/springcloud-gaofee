@@ -19,6 +19,7 @@
         <module>search-service</module>
         <module>log-service</module>
         <module>log1-service</module>
+        <module>common-security</module>
     </modules>
     <!--springboot依赖-->
     <parent>
