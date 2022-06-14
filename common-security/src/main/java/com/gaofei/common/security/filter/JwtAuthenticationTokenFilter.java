@@ -43,7 +43,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             return;
         }
         //校验合法性
-        if(!JWT.of(token).setKey("gaofei".getBytes()).verify()){
+        if(!JWT.of(token).setKey("gaofei".getBytes()).validate(0)){
             //放行
             filterChain.doFilter(request, response);
             return;

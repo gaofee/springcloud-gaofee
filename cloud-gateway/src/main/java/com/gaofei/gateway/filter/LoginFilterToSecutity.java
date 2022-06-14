@@ -35,7 +35,7 @@ public class LoginFilterToSecutity implements GlobalFilter, Ordered {
         //2.从请求头中获取token
         String token = exchange.getRequest().getHeaders().getFirst("token");
         //3.检查token是否合法jwt
-        if(StringUtils.isBlank(token) || !JWT.of(token).setKey("gaofei".getBytes()).verify()){
+        if(StringUtils.isBlank(token) || !JWT.of(token).setKey("gaofei".getBytes()).validate(0)){
             //不合法
             HashMap<String, Object> params = new HashMap<>();
             params.put("code",401);

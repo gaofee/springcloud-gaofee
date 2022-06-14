@@ -1,5 +1,7 @@
 package com.gaofei.auth.service.impl;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.jwt.JWT;
 import com.gaofei.auth.service.LoginServcie;
 
@@ -47,7 +49,7 @@ public class LoginServiceImpl implements LoginServcie {
         //使用hutool工具类生成token
         String jwt = JWT.create()
                 .setPayload("userId", userId)
-                .setKey("gaofei".getBytes())
+                .setKey("gaofei".getBytes()).setExpiresAt(DateTime.of(DateUtil.current()+1000*60*30))//token30分钟有效
                 .sign();
         //​		把用户信息存入redis中
         redisCache.setCacheObject("login:"+userId,loginUser);

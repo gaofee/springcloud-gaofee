@@ -9,17 +9,17 @@
         <outputRelativeToContentRoot value="true" />
         <module name="log1-service-api" />
         <module name="eureka-server" />
-        <module name="auth-service-v2" />
-        <module name="log-service" />
-        <module name="search-service" />
-        <module name="mongo-service" />
         <module name="auth-service" />
+        <module name="log1-service-biz" />
+        <module name="mongo-service" />
+        <module name="log-service" />
         <module name="common-security" />
         <module name="user-service" />
         <module name="cloud-gateway" />
-        <module name="springdatajpa-service" />
         <module name="goods-service" />
-        <module name="log1-service-biz" />
+        <module name="springdatajpa-service" />
+        <module name="search-service" />
+        <module name="auth-service-v2" />
       </profile>
     </annotationProcessing>
   </component>
