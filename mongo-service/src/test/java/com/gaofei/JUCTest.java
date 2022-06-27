@@ -1,6 +1,7 @@
 package com.gaofei;
 
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
  * @author : gaofee
@@ -13,6 +14,6 @@ public class JUCTest {
         copyOnWriteArrayList.add("aa");
         Object o = copyOnWriteArrayList.get(0);
         System.out.println(o);
-
     }
+
 }

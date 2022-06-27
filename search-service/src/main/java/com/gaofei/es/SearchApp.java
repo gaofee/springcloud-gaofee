@@ -47,38 +47,10 @@ public class SearchApp {
     ScrolledPage<User> scrolledPage =null;
 
 
-    int i = 1;
-
-    public int getI() {
-        return tl.get();
-    }
-
-    public void setI(int i) {
-        tl.set(i);
-    }
-
-    private  ThreadLocal<Integer> tl = new ThreadLocal<Integer>();
-
-
-
     public static void main(String[] args) {
         SpringApplication.run(SearchApp.class, args);
     }
 
-
-    @RequestMapping("tl")
-    public Object tl(){
-
-        this.setI(i++);
-
-        return getI();
-    }
-
-      @RequestMapping("tl1")
-      public Object tl1(){
-        this.setI(i++);
-        return getI();
-      }
 
 
 

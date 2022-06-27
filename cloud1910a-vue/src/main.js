@@ -5,8 +5,20 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
+
+import VueCookies from 'vue-cookies'
+
+Vue.use(VueCookies)
 //配置全局路径
 axios.defaults.baseURL="http://192.168.21.1:8200/api";
+
+import BaiduMap from 'vue-baidu-map'
+
+Vue.use(BaiduMap, {
+  // ak 是在百度地图开发者平台申请的密钥 详见 http://lbsyun.baidu.com/apiconsole/key */
+  ak: 'YxsOEEELLGrNtA3cwz4oK3k95NcST551'
+})
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 Vue.use(ElementUI);

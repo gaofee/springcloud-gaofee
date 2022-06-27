@@ -49,6 +49,7 @@
             },
             submitForm(){
                 this.axios.get("/user/login?userName="+this.ruleForm.userName+"&password="+this.ruleForm.password+"&code="+this.ruleForm.code).then(resp=>{
+
                     console.log(resp.data)
                     if(resp.data=="error"){
                         //提示错误
@@ -60,6 +61,7 @@
                         alert(resp.data)
                     }
                     else {
+
                         localStorage.setItem("tokenId", resp.data);
                         this.$router.push("/")
                     }
@@ -67,7 +69,11 @@
             }
 
         },
-        created() {
+        created: function () {
+            //document.cookie = "tokenId = 489deb0f-dea6-4656-a2e7-18ca9f25a4c9;max-age=" + 1 * 24 * 60 * 60
+            this.$cookies.set("tokenId","gaofei")
+            var token = this.$cookies.get("tokenId")
+            alert(token)
             this.captcha();
         }
     }
