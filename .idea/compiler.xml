@@ -20,6 +20,7 @@
         <module name="search-service" />
         <module name="log-service" />
         <module name="mongo-service" />
+        <module name="login4mayun" />
       </profile>
     </annotationProcessing>
   </component>
@@ -35,6 +36,7 @@
       <module name="log1-service" options="-parameters" />
       <module name="log1-service-api" options="-parameters" />
       <module name="log1-service-biz" options="-parameters" />
+      <module name="login4mayun" options="-parameters" />
       <module name="mongo-service" options="-parameters" />
       <module name="search-service" options="-parameters" />
       <module name="springcloud-1910a" options="-parameters" />
