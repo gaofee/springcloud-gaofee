@@ -25,7 +25,7 @@ import java.util.HashMap;
  * @date : 11:17 2022/5/20
  * @码云地址 : https://feege.gitee.io
  */
-@Component
+//@Component
 public class LoginFilter implements GlobalFilter, Ordered {
     @Resource
     RedisTemplate redisTemplate;

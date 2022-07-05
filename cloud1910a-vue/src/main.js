@@ -11,7 +11,7 @@ import VueCookies from 'vue-cookies'
 
 Vue.use(VueCookies)
 //配置全局路径
-axios.defaults.baseURL="http://192.168.21.1:8200/api";
+axios.defaults.baseURL="http://127.0.0.1:8200/api";
 
 import BaiduMap from 'vue-baidu-map'
 

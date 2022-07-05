@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @date : 11:17 2022/5/20
  * @码云地址 : https://feege.gitee.io
  */
-//@Component
+@Component
 public class LoginFilterToSecutity implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -30,6 +30,9 @@ public class LoginFilterToSecutity implements GlobalFilter, Ordered {
         //1.首先对登录请求进行放行
         String path = exchange.getRequest().getURI().getPath();
         if(path.contains("/user/login")){
+            return chain.filter(exchange);
+        }
+        if(path.contains("/captcha")){
             return chain.filter(exchange);
         }
         //2.从请求头中获取token
