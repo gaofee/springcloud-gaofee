@@ -4,20 +4,27 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
 import java.util.List;
 
-@Component
-public class CanalListener{
-    
- 
-    @PostConstruct
-    public void run() throws Exception {
+
+/**
+ * 使用springboot方式监听,但是boot项目会卡住
+ */
+//@Component
+public class CanalListener {
+
+    public void run(String... args) throws Exception {
+
+        System.out.println("===========================================");
         CanalConnector conn = CanalConnectors.newSingleConnector(new InetSocketAddress("127.0.0.1", 11111), "example", "", "");
-        while (true) {
+        while (true){
             conn.connect();
             //订阅实例中所有的数据库和表
             conn.subscribe(".*\\..*");
@@ -40,7 +47,9 @@ public class CanalListener{
             // 关闭连接
             conn.disconnect();
         }
+
     }
+
  
     /**
      * 数据解析
@@ -97,5 +106,7 @@ public class CanalListener{
         }
         System.out.println("操作时间：" + timestamp);
     }
-    
+
+
+
 }
