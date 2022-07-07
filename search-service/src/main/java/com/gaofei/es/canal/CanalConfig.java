@@ -5,6 +5,7 @@ import com.gaofei.es.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.javatool.canal.client.annotation.CanalTable;
+import top.javatool.canal.client.context.CanalContext;
 import top.javatool.canal.client.handler.EntryHandler;
 
 import java.util.Map;
@@ -25,6 +26,7 @@ public class CanalConfig implements EntryHandler<Book> {
     public void insert(Book userTest) {
 //        stringRedisTemplate.opsForValue().set("userTest", userTest.getName());
         System.out.println("新增了:"+userTest);
+        System.out.println(CanalContext.getModel());
         EntryHandler.super.insert(userTest);
     }
  

@@ -10,17 +10,20 @@
         <module name="common-security" />
         <module name="springdatajpa-service" />
         <module name="canal-spring-boot-starter" />
+        <module name="canal-spring-boot-autoconfigure" />
         <module name="user-service" />
         <module name="eureka-server" />
         <module name="cloud-gateway" />
         <module name="log1-service-biz" />
         <module name="goods-service" />
         <module name="auth-service" />
+        <module name="canal-example" />
         <module name="log1-service-api" />
         <module name="auth-service-v2" />
         <module name="search-service" />
         <module name="log-service" />
         <module name="mongo-service" />
+        <module name="canal-client" />
         <module name="login4mayun" />
       </profile>
     </annotationProcessing>

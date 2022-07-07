@@ -3,6 +3,16 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/auth-service-v2/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auth-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-example/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-example/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-spring-boot-autoconfigure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-spring-boot-autoconfigure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-spring-boot-starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/canal-spring-boot-starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/canal-client-master/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/canal-spring-boot-starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/canal-spring-boot-starter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway/src/main/java" charset="UTF-8" />
