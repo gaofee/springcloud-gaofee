@@ -5,7 +5,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-
+// 全局引入相关包
+import * as echarts from "echarts";
+// 开启echarts
+Vue.prototype.$echarts = echarts;
 
 import VueCookies from 'vue-cookies'
 
