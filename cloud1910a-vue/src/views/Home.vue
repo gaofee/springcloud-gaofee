@@ -108,7 +108,7 @@ export default {
     websocketonmessage(e) {
       // 数据接收
       const redata = e.data
-      console.log('接收的数据', redata)
+      console.log('接收的数据', redata)//d
       if(this.option.series[0].data.length==24){
         this.option.series[0].data.shift() //删除第一个元素
       }
