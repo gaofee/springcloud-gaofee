@@ -40,22 +40,7 @@ export default {
       option:{
         xAxis: {
           type: 'category',
-          data: [
-            '0点',
-            '1点',
-            '2点',
-            '3点',
-            '4点',
-            '5点',
-            '6点',
-            '7点',
-            '8点',
-            '9点',
-            '10点',
-            '11点',
-            '12点',
-            '13点','14点','15点','16点','17点','18点','19点','20点','21点','22点','23点','24点'
-          ]
+          data: []
         },
         yAxis: {
           type: 'value'
@@ -112,6 +97,10 @@ export default {
       if(this.option.series[0].data.length==24){
         this.option.series[0].data.shift() //删除第一个元素
       }
+      if(this.option.xAxis.data.length==24){
+        this.option.xAxis.data.shift();
+      }
+      this.option.xAxis.data.push(this.getCurrentTime())
       this.option.series[0].data.push(redata) //往图形报表中的数组添加元素
       this.initEcharts();
     },
@@ -147,7 +136,32 @@ export default {
       this.axios.get("/goods/list").then(resp=>{
         alert(resp.data)
       })
+    },
+   getCurrentTime() {
+      var date = new Date();//当前时间
+      var year = date.getFullYear() //返回指定日期的年份
+      var month = this.repair(date.getMonth() + 1);//月
+      var day = this.repair(date.getDate());//日
+      var hour = this.repair(date.getHours());//时
+      var minute = this.repair(date.getMinutes());//分
+      var second = this.repair(date.getSeconds());//秒
+
+      //当前时间
+      var curTime = year + "-" + month + "-" + day
+          + " " + hour + ":" + minute + ":" + second;
+  return curTime;
+}
+
+//补0
+    ,
+    repair(i){
+            if (i >= 0 && i <= 9) {
+              return "0" + i;
+            } else {
+              return i;
+            }
     }
+
   }
 }
 </script>
