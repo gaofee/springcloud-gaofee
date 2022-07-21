@@ -21,6 +21,8 @@
         <module>log1-service</module>
         <module>common-security</module>
         <module>login4mayun</module>
+        <module>activiti-workflow</module>
+        <module>easy-excel</module>
     </modules>
     <!--springboot依赖-->
     <parent>

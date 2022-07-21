@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author yang peng
+ * @authorgaofee
  * @date 2019/3/2921:38
  */
 public abstract class AbstractMessageHandler implements MessageHandler<Message> {

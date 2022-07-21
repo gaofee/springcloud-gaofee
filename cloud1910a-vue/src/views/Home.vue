@@ -6,10 +6,13 @@
     <el-button type="success" @click="dd">演示文件预览</el-button>
     <br>
 
-<!--echarts-->
+    <!--echarts-->
 
     <div class="box-pie" id="main1" style="height: 400px" ref="chart"></div>
     <br>
+
+
+
     <label>关键词：<input v-model="keyword"></label>
     <label>地区：<input v-model="location"></label>
     <baidu-map class="map" center="北京">
@@ -35,50 +38,92 @@ export default {
   data () {
     return {
       option:{
-        title: {
-          text: 'Referer of a Website',
-          subtext: 'Fake Data',
-          left: 'center'
+        xAxis: {
+          type: 'category',
+          data: [
+            '0点',
+            '1点',
+            '2点',
+            '3点',
+            '4点',
+            '5点',
+            '6点',
+            '7点',
+            '8点',
+            '9点',
+            '10点',
+            '11点',
+            '12点',
+            '13点','14点','15点','16点','17点','18点','19点','20点','21点','22点','23点','24点'
+          ]
         },
-        tooltip: {
-          trigger: 'item'
-        },
-        legend: {
-          orient: 'vertical',
-          left: 'left'
+        yAxis: {
+          type: 'value'
         },
         series: [
           {
-            name: 'Access From',
-            type: 'pie',
-            radius: '50%',
-            data: [
-              { value: 1048, name: 'Search Engine' },
-              { value: 735, name: 'Direct' },
-              { value: 580, name: 'Email' },
-              { value: 484, name: 'Union Ads' },
-              { value: 300, name: 'gaofei' }
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
+            data: [],
+            type: 'line',
+            smooth: true
           }
         ]
       },
       location: '北京',
       keyword: '百度',
-      myChart:null
+      myChart:null,
+      wsUrl: 'ws://127.0.0.1:8888/test/oneToMany', // ws地址
+      websock: null, // ws实例
     }
   },
   mounted() {
     //初始化表格
     this.initEcharts();
+    this.initWebSocket();//初始化websocket
+  },
+
+  destroyed() {
+    // 离开路由之后断开websocket连接
+    this.websock.close()
   },
   methods:{
+    // 初始化weosocket
+    initWebSocket() {
+      if (typeof WebSocket === 'undefined')
+        return console.log('您的浏览器不支持websocket')
+      this.websock = new WebSocket(this.wsUrl)
+      this.websock.onmessage = this.websocketonmessage
+      this.websock.onopen = this.websocketonopen
+      this.websock.onerror = this.websocketonerror
+      this.websock.onclose = this.websocketclose
+    },
+    websocketonopen() {
+      // 连接建立之后执行send方法发送数据
+      let actions = { test: 'test' }
+      this.websocketsend(JSON.stringify(actions))
+    },
+    websocketonerror() {
+      // 连接建立失败重连
+      this.initWebSocket()
+    },
+    websocketonmessage(e) {
+      // 数据接收
+      const redata = e.data
+      console.log('接收的数据', redata)
+      if(this.option.series[0].data.length==24){
+        this.option.series[0].data.shift() //删除第一个元素
+      }
+      this.option.series[0].data.push(redata) //往图形报表中的数组添加元素
+      this.initEcharts();
+    },
+    websocketsend(Data) {
+      // 数据发送
+      this.websock.send(Data)
+    },
+    websocketclose(e) {
+      // 关闭
+      console.log('断开连接', e)
+    },
+
     initEcharts(){
       var elementById = document.getElementById("main1");
       this.myChart = this.$echarts.init(elementById);

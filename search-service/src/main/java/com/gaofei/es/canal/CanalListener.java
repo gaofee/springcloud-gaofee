@@ -15,6 +15,7 @@ import java.util.List;
 
 
 /**
+ * 使用springboot方式监听,但是boot项目会卡住,可以使用多线程的方式监听
  * 使用springboot方式监听,但是boot项目会卡住,可以开多线程监听
  */
 //@Component

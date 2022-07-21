@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="common-security" />
         <module name="springdatajpa-service" />
+        <module name="activiti-workflow" />
         <module name="canal-spring-boot-starter" />
         <module name="canal-spring-boot-autoconfigure" />
         <module name="user-service" />
@@ -25,15 +26,18 @@
         <module name="mongo-service" />
         <module name="canal-client" />
         <module name="login4mayun" />
+        <module name="easy-excel" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="activiti-workflow" options="-parameters" />
       <module name="auth-service" options="-parameters" />
       <module name="auth-service-v2" options="-parameters" />
       <module name="cloud-gateway" options="-parameters" />
       <module name="common-security" options="-parameters" />
+      <module name="easy-excel" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="goods-service" options="-parameters" />
       <module name="log-service" options="-parameters" />

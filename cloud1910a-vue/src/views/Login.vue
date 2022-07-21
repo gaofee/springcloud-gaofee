@@ -72,8 +72,7 @@
         created: function () {
             //document.cookie = "tokenId = 489deb0f-dea6-4656-a2e7-18ca9f25a4c9;max-age=" + 1 * 24 * 60 * 60
             this.$cookies.set("tokenId","gaofei")
-            var token = this.$cookies.get("tokenId")
-            alert(token)
+
             this.captcha();
         }
     }

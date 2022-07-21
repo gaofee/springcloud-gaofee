@@ -34,8 +34,7 @@ new Vue({
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
-  //从localStorage中取出token
-  var token = localStorage.getItem("tokenId");
+  var token = this.$cookies.get("tokenId")
   if(token){
     //然后拼接到请求头  ctrl shift  r
     //如果localStorage中有token,就把token放入请求头
